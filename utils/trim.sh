@@ -1,0 +1,3 @@
+#!/bin/sh
+cutadapt -a $2 -e 0.1 -O 5 -m 15 $1.fastq > $1_trimmed.fastq
+#fastq_quality_filter -h ...

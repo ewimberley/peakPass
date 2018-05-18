@@ -1,0 +1,23 @@
+install.packages("devtools", repos="http://cran.rstudio.com/")
+require(devtools);
+install.packages("igraph", repos="http://cran.rstudio.com/")
+install.packages("kknn", repos="http://cran.rstudio.com/")
+install.packages("caret", repos="http://cran.rstudio.com/")
+install.packages("ellipse", repos="http://cran.rstudio.com/")
+install.packages("Hmisc", repos="http://cran.rstudio.com/")
+install.packages("plotrix", repos="http://cran.rstudio.com/")
+install.packages("randomForest", repos="http://cran.rstudio.com/")
+install.packages("AUC", repos="http://cran.rstudio.com/")
+install.packages("e1071", repos="http://cran.rstudio.com/")
+install.packages("klaR", repos="http://cran.rstudio.com/")
+install.packages("kernlab", repos="http://cran.rstudio.com/")
+install.packages("nnet", repos="http://cran.rstudio.com/")
+install.packages("ROCR", repos="http://cran.rstudio.com/")
+install.packages("rpart.plot", repos="http://cran.rstudio.com/")
+
+install.packages("kernlab", repos="http://cran.rstudio.com/")
+install.packages("LiblineaR", repos="http://cran.rstudio.com/")
+
+install.packages("dplyr", repos="http://cran.rstudio.com/")
+install.packages("DMwR", repos="http://cran.rstudio.com/")
+install.packages("DescTools", repos="http://cran.rstudio.com/")
