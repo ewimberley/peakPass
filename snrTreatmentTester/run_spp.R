@@ -782,6 +782,15 @@ if ( (crosscorr$rel.phantom.coeff >= 0) & (crosscorr$rel.phantom.coeff < 0.25) )
 }
 cat("Phantom Peak Quality Tag",crosscorr$phantom.quality.tag,"\n",file=stdout())
 
+#Modifications by Eric
+maxCC <- paste(cc.peak$y,collapse=",")
+minCC <- crosscorr$min.cc$y
+pathParts <- unlist(strsplit(iparams$chip.file, "/"))
+fileName <- pathParts[length(pathParts)]
+#qualityData <- data.frame("id"=unlist(strsplit(fileName, "\\."))[1], "nsc"=as.character(crosscorr$phantom.coeff), "rsc"=as.character(crosscorr$rel.phantom.coeff),"maxCrossCorrelation"=as.character(maxCC),"minCrossCorrelation"=minCC)
+qualityData <- data.frame("id"=unlist(strsplit(fileName, "\\."))[1], "nsc"=as.character(crosscorr$phantom.coeff), "rsc"=as.character(crosscorr$rel.phantom.coeff))
+write.table(qualityData, "quality_data.csv", row.names=FALSE, col.names=FALSE, quote=FALSE, sep=",", append = TRUE)
+
 # Output result to result file if required
 #Filename\tnumReads\tPeak_shift\tPeak_Correlation\tRead_length\tPhantomPeak_Correlation\tMin_Correlation_Shift\tMin_Correlation\tNormalized_CrossCorrelation_Coefficient\tRelative_CrossCorrelation_Coefficient\tQualityTag)
 if (! is.na(iparams$output.result.file)) {
