@@ -12,7 +12,11 @@ def main(argv):
       print "Usage ./joinTreatment.py <treatment csv file> <combined csv file> <treatment name>"
       sys.exit()
    combined = open(combinedCsv,"a")
+   first=True
    with open(treatmentCsv, 'r') as f:
+      if first:
+         f.readline()
+         first=False
       f.readline()
       for line in f:
          combined.write(line.lstrip().rstrip() + "," + treatmentName + "\n");

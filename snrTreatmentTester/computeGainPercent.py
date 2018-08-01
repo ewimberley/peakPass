@@ -9,7 +9,7 @@ def main(argv):
       treatmentCsv = argv[1]
       treatmentName = argv[2]
    else:
-      print "Usage ./computeGain.py <original quality csv file> <treatment quality csv> <treatment name>"
+      print "Usage ./computeGainPercent.py <original quality csv file> <treatment quality csv> <treatment name>"
       sys.exit()
    originalNSCs = {}
    originalRSCs = {}
@@ -23,8 +23,8 @@ def main(argv):
          originalNSCs[bamId] = nsc;
          originalRSCs[bamId] = rsc;
 
-   gainCsv = open(treatmentName+"_quality_gain.csv","w+")
-   gainCsv.write("bamId,nscGain,rscGain\n")
+   gainCsv = open(treatmentName+"_quality_gainPercent.csv","w+")
+   gainCsv.write("bamId,nscGainPercent,rscGainPercent\n")
    with open(treatmentCsv, 'r') as f:
       f.readline()
       for line in f:
@@ -34,7 +34,9 @@ def main(argv):
          rsc = float(columns[2].rstrip().lstrip())
          nscGain = nsc - originalNSCs[bamId]
          rscGain = rsc - originalRSCs[bamId]
-         gainCsv.write(bamId + "," + str(nscGain) + "," + str(rscGain) + "\n")
+         nscGainPercent = nscGain / originalNSCs[bamId] * 100.0
+         rscGainPercent = rscGain / originalRSCs[bamId] * 100.0
+         gainCsv.write(bamId + "," + str(nscGainPercent) + "," + str(rscGainPercent) + "\n")
       f.close()
 
 if __name__ == "__main__":
