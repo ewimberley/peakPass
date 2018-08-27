@@ -1,5 +1,6 @@
 install.packages("devtools", repos="http://cran.rstudio.com/")
 require(devtools);
+install.packages("ggplot2", repos="http://cran.rstudio.com/")
 install.packages("igraph", repos="http://cran.rstudio.com/")
 install.packages("kknn", repos="http://cran.rstudio.com/")
 install.packages("caret", repos="http://cran.rstudio.com/")
@@ -19,5 +20,6 @@ install.packages("kernlab", repos="http://cran.rstudio.com/")
 install.packages("LiblineaR", repos="http://cran.rstudio.com/")
 
 install.packages("dplyr", repos="http://cran.rstudio.com/")
+install.packages("plyr", repos="http://cran.rstudio.com/")
 install.packages("DMwR", repos="http://cran.rstudio.com/")
 install.packages("DescTools", repos="http://cran.rstudio.com/")
