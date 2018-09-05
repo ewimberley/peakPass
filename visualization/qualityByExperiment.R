@@ -6,12 +6,9 @@ datasetFile <- args[1]
 variable <- args[2]
 datasetData <- read.csv(datasetFile, header = TRUE)
 
-y = count(datasetData, variable)
-y
-
-png(file = "DatasetComposition.png")
-#bp <- ggplot(y, aes(x="", y=freq, fill=libraryComplexity)) + geom_bar(width = 1, stat = "identity")
-bp <- ggplot(y, aes_string(x="", y="freq", fill=as.character(variable))) + geom_bar(width = 1, stat = "identity")
-pie <- bp + coord_polar("y", start=0)
-pie
+png(file = "libraryQualityComposition.png")
+datasetData$bottleNecking <- replace(as.character(datasetData$bottleNecking), datasetData$bottleNecking == "severe", "poor")
+y <- melt(data = datasetData, id.vars = "alignmentFile", measure.vars = c("libraryComplexity", "bottleNecking","readDepth","readLength"))
+g <- ggplot(y, aes(variable)) + geom_bar(aes(fill=value), width = 0.5) + labs(x="Quality Metric", y="Samples") + coord_flip()
+g
 dev.off()
