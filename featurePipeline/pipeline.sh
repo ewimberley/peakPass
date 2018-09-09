@@ -51,20 +51,13 @@ function gatherFeatures {
 	printMessage "Running number of repeat feature gathering"
 	#TODO commented out commands can be used to calculate num overlapping repeats in 10kb area around region
 	#bedtools slop -i sorted_tiles.bed -g $GENOME_MAPS/hg19.map -b 10000 > sorted_tiles_10kb_expand.bed &
-	#TILE_EXPANSION=$!
 	#TODO last line of repeatsInTiles.bed contains overlap bases, sum these up for every unique id and use that as a feature
 	bedtools intersect -a sorted_tiles.bed -b $REPEAT_BED -wo > repeatsInTiles.bed &
         OVERLAPPING_REPEATS=$!
-	#wait $TILE_EXPANSION
-	#bedtools intersect -a sorted_tiles_10kb_expand.bed -b $REPEAT_BED -wo -F 0.8 > repeatsIn10KbTiles.bed &
-        #EXPANDED_REPEATS=$!
 	
 	wait $GAPS
 	awk '{print $1"\t"$2}' gaps.dat > gapDistance.dat &
         GAP_DISTANCE=$!
-	#Gap bridge data not available for all genome assemblies
-	#awk '{print $1"\t"$3}' gaps.dat > gapBridge.dat &
-        #GAP_BRIDGE=$!
 	awk '{print $1"\t"$4}' gaps.dat > gapType.dat &
         GAP_TYPE=$!
 	awk '{print $1"\t"$5}' gaps.dat > gapSize.dat &
@@ -72,23 +65,16 @@ function gatherFeatures {
 	wait $OVERLAPPING_REPEATS
 	awk '{print $1"_"$2"_"$3}' repeatsInTiles.bed | uniq -c | awk '{print $2"\t"$1}' > intersectingRepeats.dat &
         REPEAT_COUNT=$!
-	#wait $EXPANDED_REPEATS
-	#awk '{print $1"_"$2"_"$3}' repeatsIn10KbTiles.bed | uniq -c | awk '{print $2"\t"$1}' > 10KbRepeats.dat &
-        #EXPANDED_REPEAT_COUNT=$!
 	wait $GAP_DISTANCE
-	#wait $GAP_BRIDGE
 	wait $GAP_TYPE
 	wait $GAP_SIZE
 	wait $GENE_DISTANCE
 	wait $REPEAT_COUNT
-	#wait $EXPANDED_REPEAT_COUNT
 
 	rm commands.txt
 	printMessage "Running softmask count feature gathering"
 	loopOverChromosomes "softmaskCount $TILES_FASTA" #$PROC_POOL_SIZE
 
-	#printMessage "Running CG content feature gathering"
-	#loopOverChromosomes "cgCount $TILES_FASTA"
 	printMessage "Running monomer percent feature gathering"
 	loopOverChromosomes "monomerPercent $TILES_FASTA"
 
@@ -109,12 +95,9 @@ function gatherFeatures {
 	#./alignabilityKmers.py expanded_training.fa /mnt/RAM_disk/hg19Combined/hg19 36 20
         loopOverChromosomes "alignability $ALIGNABILTY_BEDGRAPHS" #$PROC_POOL_SIZE
 
-	#XXX refactor this line to pipelineUtils.sh
 	cat commands.txt | xargs -t -I CMD --max-procs=$PROC_POOL_SIZE bash -c CMD	
 
-	#cat signal_chr*.dat >> signal.dat
 	cat softmaskCount_*.dat >> softmaskCount.dat
-	#cat cgCount_*.dat >> cgCount.dat
 	cat monomerPercent_*.dat >> monomerPercent.dat
 	awk '{print $1"\t"$2}' monomerPercent.dat > monomerPercentA.dat
 	awk '{print $1"\t"$3}' monomerPercent.dat > monomerPercentT.dat
@@ -131,7 +114,6 @@ function gatherFeatures {
 	awk '{print $1"\t"$5}' alignability.dat > alignabilityMappingRatio.dat
 
 	rm softmaskCount_*.dat
-	#rm cgCount_*.dat
 	rm monomerPercent_*.dat
 	rm uniqueKmers_3_*.dat
 	rm uniqueKmers_4_*.dat
@@ -144,7 +126,6 @@ function gatherFeatures {
 	#Copy the class label, merge columns on all files, and add column names #
 	#########################################################################
 	joinFeature "softmaskCount"
-	#joinFeature "cgCount"
 	joinFeature "monomerPercentA"
 	joinFeature "monomerPercentT"
 	joinFeature "monomerPercentC"
@@ -158,11 +139,8 @@ function gatherFeatures {
 	joinFeature "alignabilityAboveUpperThresh"
 	joinFeature "alignabilityMappingRatio"
 	joinFeature "gapDistance"
-	#joinFeature "gapBridge"
-	#joinFeature "gapSize"
 	joinFeature "geneDistance"
 	joinFeatureDefaultValue "intersectingRepeats" '0'
-	#joinFeatureDefaultValue "10KbRepeats" '0'
 
 	#true for training, false for making predictions on new genomes 
 	if [ "$1" = true ] ; then
@@ -218,17 +196,6 @@ if [ "$#" -eq 2 ] || [ "$#" -eq 3 ] ; then
 		setup
 		gatherFeatures false
 	fi
-#elif [ "$#" -eq 3 ]; then
-#	###########################################
-#	# Testing Harness                         #
-#	###########################################
-#	printMessage "Running testing harness..."
-#	source $2
-#	if [ "$1" = "testHarness" ] ; then
-#		if [ "$2" = "setup" ] ; then
-#			setup
-#		fi
-#	fi
 
 else
         echo "Usage pipeline.sh <mode: test|train|predict> <config bash file> <oversample (optional)>" 
