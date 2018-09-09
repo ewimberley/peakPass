@@ -9,30 +9,51 @@ There are two configuration files for the freature pipeline: config/pipeline_con
 config/pipeline_config.sh example:
 
 #PROC_POOL_SIZE=12
+
 FREE_PROCS=2
+
 PROC_POOL_SIZE=$(nproc)
+
 PROC_POOL_SIZE=$(($PROC_POOL_SIZE-$FREE_PROCS))
 
+
 DATA_FILE="data.dat"
+
 DATA_CSV="data.csv"
+
 BLACKLIST_CLASS="blacklist"
+
 NORMAL_CLASS="normal"
+
 GAPS="gaps_sorted.bed"
+
 GENES="genes_sorted.bed"
+
 REPEATS="repeatMasker_sorted.bed"
+
 ALIGNABILTY75="alignability75"
+
 DATA_PATH="/thesis/ThesisData"
+
 RAM_DISK="/media/ramdisk"
+
 FASTA_AND_INDEX="combined"
+
 
 Per-run configuration example:
 
 #!/bin/bash
+
 export GENOME_VERSION="hg19"
+
 export BLACKLIST_BED="$BLACKLISTS/Anshul_Hg19UltraHighSignalArtifactRegions.bed"
+
 export WINDOW_SIZE=1000
+
 export OVERLAP_WINDOW=0.7
+
 export NUM_SAMPLES=4000000
+
 
 Make sure that there is a folder in DATA_PATH with the same name as GENOME_VERSION.
 
