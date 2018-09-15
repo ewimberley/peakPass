@@ -18,9 +18,6 @@ def main(argv):
    else:
       print "Usage softmaskCount.py <fasta file> <chromosome>"
       sys.exit()
-   #f=open(inputFile,"r")
-   #lines=f.readlines()
-   #seqs = dict()
    name = ""
    seq = ""
    with open(inputFile) as f:
@@ -30,14 +27,10 @@ def main(argv):
                nameParts = name.split("_")
                if nameParts[0] == chromosome:
                   featureGathering(name, seq)
-                  #seqs[name] = seq
             seq = ""
             name = x.replace(">", "").replace("-", "_").replace(":", "_").rstrip().lstrip()
          else:
             seq = seq + x.rstrip().lstrip()
-   #for key in seqs:
-   #   featureGathering(key, seqs[key])
-   #f.close()
 
 if __name__ == "__main__":
    main(sys.argv[1:])

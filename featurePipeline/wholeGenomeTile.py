@@ -23,21 +23,18 @@ def main(argv):
    else:
       print "Usage wholeGenomeTile.py <genome map file> <length of outputs> <offset (optional)>"
       sys.exit()
-   f=open(inputfile,"r")
-   lines=f.readlines()
-   numChromosomes = 0
-   for x in lines:
-      columns = x.split('\t')
-      chrom =  columns[0].rstrip()
-      chromLen =  int(columns[1].rstrip())
-      onOffset = 0
-      if len(argv) == 3:
-         onOffset = offset
-      while (onOffset + lenOutputs) < chromLen:
-         onOffset = onOffset + lenOutputs
-         print chrom + "\t" + str(onOffset) + "\t" + str(onOffset+lenOutputs)
-
-   f.close()
+   with open(inputfile,"r") as f:
+      numChromosomes = 0
+      for x in f:
+         columns = x.split('\t')
+         chrom =  columns[0].rstrip()
+         chromLen =  int(columns[1].rstrip())
+         onOffset = 0
+         if len(argv) == 3:
+            onOffset = offset
+         while (onOffset + lenOutputs) < chromLen:
+            onOffset = onOffset + lenOutputs
+            print chrom + "\t" + str(onOffset) + "\t" + str(onOffset+lenOutputs)
 
 if __name__ == "__main__":
    main(sys.argv[1:])

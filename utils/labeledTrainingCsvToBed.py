@@ -8,6 +8,7 @@ def main(argv):
       inputFile = argv[0]
    else:
       print "Usage trainingCsvToBed.py <csv file>"
+      print "Turn a training CSV file into a bed file (for better use with bedtools)."
       sys.exit()
    firstLine = True
    with open(inputFile) as f:

@@ -1,3 +1,4 @@
+#A simple R script that transposes a dataset
 options(echo=TRUE)
 args <- commandArgs(trailingOnly = TRUE)
 fileIn <- args[1]

@@ -26,24 +26,22 @@ def main(argv):
    else:
       print "Usage cgCount.py <fasta file> <chromosome>"
       sys.exit()
-   f=open(inputfile,"r")
-   lines=f.readlines()
-   seqs = dict()
-   name = ""
-   seq = ""
-   for x in lines:
-      if '>' in x:
-         if name != "":
-            nameParts = name.split("_")
-            if nameParts[0] == chromosome:
-               seqs[name] = seq
-         seq = ""
-         name = x.replace(">", "").replace("-", "_").replace(":", "_").rstrip().lstrip()
-      else:
-         seq = seq + x.rstrip().lstrip()
-   for key in seqs:
-      featureGathering(key, seqs[key])
-   f.close()
+   with open(inputfile,"r") as f:
+      seqs = dict()
+      name = ""
+      seq = ""
+      for x in f:
+         if '>' in x:
+            if name != "":
+               nameParts = name.split("_")
+               if nameParts[0] == chromosome:
+                  seqs[name] = seq
+            seq = ""
+            name = x.replace(">", "").replace("-", "_").replace(":", "_").rstrip().lstrip()
+         else:
+            seq = seq + x.rstrip().lstrip()
+      for key in seqs:
+         featureGathering(key, seqs[key])
 
 if __name__ == "__main__":
    main(sys.argv[1:])

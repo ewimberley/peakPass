@@ -8,6 +8,7 @@ def main(argv):
       inputfile = argv[0]
    else:
       print "Usage genomeMap.py <fasta file>"
+      print "Build a genome map (used by the feature pipeline) from a whole-genome fasta file."
       sys.exit()
    f=open(inputfile,"r")
    lines=f.readlines()

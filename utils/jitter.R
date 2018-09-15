@@ -1,3 +1,4 @@
+#This script takes a dataset and applies a jitter randomization function to it.
 library(scales)
 options("width"=600)
 #options(error=traceback)

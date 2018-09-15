@@ -8,6 +8,7 @@ def main(argv):
       inputFile = argv[0]
    else:
       print "Usage bedToTrainingCsv.py <csv file>"
+      print "Turn a training bed file into a CSV file for better use with R scripts."
       sys.exit()
    with open(inputFile) as f:
       for x in f:
