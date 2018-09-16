@@ -105,16 +105,10 @@ if (length(args)!=0) {
 testingDataRaw <- read.csv(testingFile, header = TRUE)
 testing <- subset(testingDataRaw, , -c(1))
 
-#Use to drop specific features
-#training <- subset(training, select = -c(gapDistance,gapSize,geneDistance) )
-#testing <- subset(testing, select = -c(gapDistance,gapSize,geneDistance) )
-#training <- subset(training, select = -c(gapSize, alignabilityBelowLowerThresh) )
-#testing <- subset(testing, select = -c(gapSize, alignabilityBelowLowerThresh) )
 training <- subset(training, select = -c(gapSize,alignabilityAboveUpperThresh,uniqueKmers3,monomerRepeats) )
 testing <- subset(testing, select = -c(gapSize,alignabilityAboveUpperThresh,uniqueKmers3,monomerRepeats) )
 
 set.seed(20)
-#control <- trainControl(method="cv", number=10, classProbs = TRUE)
 control <- trainControl(method="repeatedcv", number=10, repeats=3, search="random", summaryFunction=twoClassSummary, classProbs = TRUE)
 metric <- "ROC"
 trainingSplit <- split(training, training$classLabel)
