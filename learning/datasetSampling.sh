@@ -1,5 +1,12 @@
 #!/bin/bash
 ./splitDataset.py ../featurePipeline/data.csv 0.9
+
+#make a tuning dataset
+./splitDataset.py training.csv 0.5 tuning
+./mergeClassLabels.py tuning_training.csv
+./mergeClassLabels.py tuning_testing.csv
+./downsample.py tuning_training_simplified.csv 2000 2000
+
 ./randomValidationSets.py training.csv 32
 rm commands.txt
 for trainingFile in training_*.csv; do

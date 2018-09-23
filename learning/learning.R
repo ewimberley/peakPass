@@ -105,8 +105,10 @@ if (length(args)!=0) {
 testingDataRaw <- read.csv(testingFile, header = TRUE)
 testing <- subset(testingDataRaw, , -c(1))
 
-training <- subset(training, select = -c(gapSize,alignabilityAboveUpperThresh,uniqueKmers3,monomerRepeats) )
-testing <- subset(testing, select = -c(gapSize,alignabilityAboveUpperThresh,uniqueKmers3,monomerRepeats) )
+#training <- subset(training, select = -c(gapSize,alignabilityAboveUpperThresh,uniqueKmers3,monomerRepeats) )
+#testing <- subset(testing, select = -c(gapSize,alignabilityAboveUpperThresh,uniqueKmers3,monomerRepeats) )
+training <- subset(training, select = -c(alignabilityAboveUpperThresh,uniqueKmers3,monomerRepeats) )
+testing <- subset(testing, select = -c(alignabilityAboveUpperThresh,uniqueKmers3,monomerRepeats) )
 
 set.seed(20)
 control <- trainControl(method="repeatedcv", number=10, repeats=3, search="random", summaryFunction=twoClassSummary, classProbs = TRUE)

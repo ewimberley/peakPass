@@ -7,12 +7,17 @@ def main(argv):
    if len(argv) == 2:  
       inputfile = argv[0]
       trainingRatio = float(argv[1])
+      outputPrefix = ""
+   if len(argv) == 3:  
+      inputfile = argv[0]
+      trainingRatio = float(argv[1])
+      outputPrefix = argv[2] + "_"
    else:
-      print "Usage splitDataset.py <data csv file> <ratio training data>"
+      print "Usage splitDataset.py <data csv file> <ratio training data> <output prefix (optional)>"
       print "Split a dataset into training and testing datasets"
       sys.exit()
-   training = open("training.csv", "w")
-   testing = open("testing.csv", "w")
+   training = open(outputPrefix + "training.csv", "w")
+   testing = open(outputPrefix + "testing.csv", "w")
    blacklistItemsInTraining = {}
    with open(inputfile, 'r') as f:
       header = f.readline()
