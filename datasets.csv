@@ -7,6 +7,8 @@ ENCFF706HJC,ENCSR920BLG,ENCFF446MUL,1,SIN3A,K562,Michael Snyder,no,moderate,mode
 ENCFF900RPG,ENCSR920BLG,ENCFF446MUL,2,SIN3A,K562,Michael Snyder,no,moderate,moderate,moderate,moderate
 ENCFF953GCB,ENCSR953DVM,ENCFF723YBP,1,E2F8,K562,Michael Snyder,no,good,moderate,moderate,good
 ENCFF034WKA,ENCSR953DVM,ENCFF723YBP,2,E2F8,K562,Michael Snyder,no,good,moderate,moderate,good
+ENCFF732ZCF,ENCSR085QEV,ENCFF023PLP,1,NBN,K562,Michael Snyder,no,good,moderate,moderate,good
+ENCFF106JJJ,ENCSR085QEV,ENCFF023PLP,2,NBN,K562,Michael Snyder,no,good,moderate,moderate,good
 ENCFF262DXP,ENCSR193NSH,,1,RAD21,A549,Tim Reddy,unknown,good,good,good,good
 ENCFF086MAL,ENCSR193NSH,,2,RAD21,A549,Tim Reddy,unknown,good,good,good,good
 ENCFF873CGO,ENCSR150EFU,,1,SMC3,A549,Tim Reddy,unknown,good,good,good,good
@@ -26,6 +28,8 @@ ENCFF280WMP,ENCSR000FBC,ENCFF702EGB,1,STAT2,K562,Sherman Weissman,no,good,good,p
 ENCFF693OEL,ENCSR000FBC,ENCFF702EGB,2,STAT2,K562,Sherman Weissman,no,good,good,poor,poor
 ENCFF877JAH,ENCSR000FAZ,ENCFF695KNI,1,MYC,K562,Sherman Weissman,no,good,good,moderate,moderate
 ENCFF701IFH,ENCSR000FAZ,ENCFF695KNI,2,MYC,K562,Sherman Weissman,no,good,good,moderate,moderate
+ENCFF774XWQ,ENCSR000EZW,ENCFF673OJN,1,JUN,K562,Sherman Weissman,no,good,good,poor,poor
+ENCFF581CGZ,ENCSR000EZW,ENCFF673OJN,2,JUN,K562,Sherman Weissman,no,good,good,poor,poor
 ENCFF629GVZ,ENCSR945NSF,ENCFF057DYX,1,PCBP2,HepG2,Xiang-Dong Fu,no,poor,poor,moderate,moderate
 ENCFF616NXH,ENCSR945NSF,ENCFF057DYX,2,PCBP2,HepG2,Xiang-Dong Fu,no,poor,poor,moderate,moderate
 ENCFF221QCF,ENCSR519QAA,ENCFF463MRT,1,HNRNPK,HepG2,Xiang-Dong Fu,no,poor,poor,moderate,moderate
@@ -38,14 +42,16 @@ ENCFF369TPH,ENCSR000DNQ,ENCFF183SZO,1,ZZZ3,GM12878,Kevin Struhl,no,good,good,mod
 ENCFF038NOW,ENCSR000DNQ,ENCFF183SZO,2,ZZZ3,GM12878,Kevin Struhl,no,good,good,moderate,poor
 ENCFF693TLQ,ENCSR000DNN,ENCFF788ZBI,1,NFYA,GM12878,Kevin Struhl,no,good,moderate,moderate,moderate
 ENCFF743AGP,ENCSR000DNN,ENCFF788ZBI,2,NFYA,GM12878,Kevin Struhl,no,good,moderate,moderate,moderate
+ENCFF000YZD,ENCSR000DOH,ENCFF144SVY,1,SIRT6,K562,Kevin Struhl,unknown,good,good,good,poor
+ENCFF000YZE,ENCSR000DOH,ENCFF144SVY,2,SIRT6,K562,Kevin Struhl,unknown,good,good,good,poor
 ENCFF817LMJ,ENCSR892DRK,ENCFF458FNC,1,REST,A549,Bradley Bernstein,no,moderate,moderate,good,good
 ENCFF559SXA,ENCSR892DRK,ENCFF458FNC,2,REST,A549,Bradley Bernstein,no,moderate,moderate,good,good
 ENCFF211TQG,ENCSR000AOA,ENCFF349SPV,1,CTCF,HeLa-S3,Bradley Bernstein,no,moderate,moderate,moderate,moderate
 ENCFF046FAF,ENCSR000AOA,ENCFF349SPV,2,CTCF,HeLa-S3,Bradley Bernstein,no,moderate,moderate,moderate,moderate
 ENCFF226SIV,ENCSR549NPZ,ENCFF452WYE,1,CBX3,GM12878,Bradley Bernstein,no,good,good,good,moderate
 ENCFF045BQI,ENCSR549NPZ,ENCFF452WYE,2,CBX3,GM12878,Bradley Bernstein,no,good,good,good,moderate
-ENCFF919IIQ,ENCSR384LYW,ENCFF635YAT,1,EZH2,H9,Bradley Bernstein,no,good,moderate,good,good
-ENCFF900VKF,ENCSR384LYW,ENCFF635YAT,2,EZH2,H9,Bradley Bernstein,no,good,moderate,good,good
+ENCFF919IIQ,ENCSR384LYW,ENCFF635YAT,1,EZH2,,Bradley Bernstein,no,good,moderate,good,good
+ENCFF900VKF,ENCSR384LYW,ENCFF635YAT,2,EZH2,,Bradley Bernstein,no,good,moderate,good,good
 ENCFF880WAM,ENCSR000DSZ,ENCFF161ALY,1,CTCF,HAc,John Stamatoyannopoulos,no,moderate,moderate,poor,moderate
 ENCFF723TFB,ENCSR000DSZ,ENCFF161ALY,2,CTCF,HAc,John Stamatoyannopoulos,no,moderate,moderate,poor,moderate
 ENCFF757VQN,ENCSR000EXZ,ENCFF927ROY,1,GATA3,SH-SY5Y,Peggy Farnham,no,moderate,moderate,moderate,moderate
@@ -56,3 +62,5 @@ ENCFF568ZAY,ENCSR000EVX,ENCFF558APS,1,ZNF274,K562,Peggy Farnham,no,moderate,mode
 ENCFF587ARB,ENCSR000EVX,ENCFF558APS,2,ZNF274,K562,Peggy Farnham,no,moderate,moderate,moderate,moderate
 ENCFF701DUO,ENCSR000EWI,ENCFF910AUJ,1,SETDB1,K562,Peggy Farnham,no,good,good,poor,poor
 ENCFF534VEA,ENCSR000EWI,ENCFF910AUJ,2,SETDB1,K562,Peggy Farnham,no,good,good,poor,poor
+ENCFF429NUZ,ENCSR000DNI,ENCFF720CRM,1,CTCF,,Vishwanath Iyer,no,moderate,moderate,poor,good
+ENCFF337IBI,ENCSR000DNI,ENCFF720CRM,2,CTCF,,Vishwanath Iyer,no,moderate,moderate,poor,good
