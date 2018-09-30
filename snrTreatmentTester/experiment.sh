@@ -5,15 +5,15 @@ DATASET_DIR=/highspeed/hg19ChipSeqDataSets
 
 #hg19 predicted blacklist 40%
 #FILTERED_DIR=/bigdisk/hg19ChipSeq40FilteredDataSets
-#BLACKLIST=hg19PredictedBlacklist40Percent.bed
+#BLACKLIST=../blacklists/hg19PredictedBlacklist40Percent.bed
 
 #hg19 predicted blacklist 50%
 #FILTERED_DIR=/bigdisk/hg19ChipSeq50FilteredDataSets
-#BLACKLIST=hg19PredictedBlacklist50Percent.bed
+#BLACKLIST=../blacklists/hg19PredictedBlacklist50Percent.bed
 
 #Wg concensses
 FILTERED_DIR=/bigdisk/hg19ChipSeqWgFilteredDataSets
-BLACKLIST=wgEncodeHg19ConsensusSignalArtifactRegions.bed 
+BLACKLIST=../blacklists/wgEncodeHg19ConsensusSignalArtifactRegions.bed 
 
 ###########
 #Run filter
@@ -28,8 +28,8 @@ rm commands.txt
 rm commands.txt
 rm quality_data.csv
 ./runAllCrossCorrelations.py $DATASET_DIR/datasets.csv $DATASET_DIR 
-#cat commands.txt | xargs -t -I CMD --max-procs=$PROC_POOL_SIZE bash -c CMD
-#mv quality_data.csv unfiltered_quality_data.csv
+cat commands.txt | xargs -t -I CMD --max-procs=$PROC_POOL_SIZE bash -c CMD
+mv quality_data.csv unfiltered_quality_data.csv
 
 #################################
 #Compute quality of filtered data

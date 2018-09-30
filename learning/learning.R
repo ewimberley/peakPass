@@ -160,7 +160,7 @@ if(action == "tuning"){
   } else if(algorithm == "svmLinear") {
     model <- ksvm(classLabel~., training, kernel='vanilladot', C=1, prob.model=TRUE)
   } else if(algorithm == "naiveBayes") {
-    model <- naiveBayes(classLabel~., data=training)
+    model <- naiveBayes(classLabel~., data=training, usekernel = FALSE)
   } else if(algorithm == "knn") {
     model <- train.kknn(classLabel~., training, kernel = "triangular", kmax=15, distance=0.5)
   } else if(algorithm == "ann") {
