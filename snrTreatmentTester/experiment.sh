@@ -29,15 +29,20 @@ rm commands.txt
 rm quality_data.csv
 ./runAllCrossCorrelations.py $DATASET_DIR/datasets.csv $DATASET_DIR 
 cat commands.txt | xargs -t -I CMD --max-procs=$PROC_POOL_SIZE bash -c CMD
-mv quality_data.csv unfiltered_quality_data.csv
+cat quality_data.csv >> unfiltered_quality_data.csv
 
 #################################
 #Compute quality of filtered data
 #################################
 rm commands.txt
+rm quality_data.csv
 ./runAllCrossCorrelations.py $DATASET_DIR/datasets.csv $FILTERED_DIR 
 cat commands.txt | xargs -t -I CMD --max-procs=$PROC_POOL_SIZE bash -c CMD
-mv quality_data.csv filtered_quality_data.csv
+cat quality_data.csv >> filtered_quality_data.csv
 
-#sort -u -k1,1 $1.dat -o $1.dat
+sort -u -k1,1 unfiltered_quality_data.csv -o unfiltered_quality_data_sorted.csv
+sort -u -k1,1 filtered_quality_data.csv -o filtered_quality_data_sorted.csv
+echo "experiment,NSC-Control,RSC-Control,NSC-Kundaje,RSC-Kundaj" > all_data.csv
+join unfiltered_quality_data_sorted.csv filtered_quality_data_sorted.csv -t $',' >> all_data.csv
+
 #join $DATA_FILE $1.dat >> tmp_data.dat
