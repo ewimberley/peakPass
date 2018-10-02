@@ -1,0 +1,1 @@
+These are early predictions of a blacklist for for the TAIR10 genome assembly. They have not been well characterized. The three files correspond to blacklists with items of at least a given prediction confidence (0.4, 0.5, and 0.6) for stronger or weaker filtering.
