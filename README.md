@@ -93,4 +93,25 @@ chr10_100005000_100006000,0,25.2,32.4,23.0,19.4,62,218,269,67,0.0,0,0,1000,25863
 
 ## Dataset Creation
 
-Next we need to split this data.csv file into training and testing datasets.
+We need both a labeled training/testing set and an unlabeled whole genome dataset. To do this, run pipeline.sh in test mode and move data.csv to the learning dicrectory. Then run pipeline.sh in predict mode rename it to predict.csv, and move it to the learning directory.
+
+Next we need to split this data.csv file into training and testing datasets. You can do this using a python script in the learning directory.
+
+./splitDataset.py data.csv 0.5
+
+This will create a training.csv and a testing.csv. Next we will switch the class labels from the ids of blacklist regions (e.g. "chrA_1000_2000") to simply "blacklist". You can do this with the mergeClassLabels python script.
+
+./mergeClassLabels.py training.csv
+./mergeClassLabels.py testing.csv
+
+To make a managable final training set, down sample to 2000 blacklist items and 2000 normal items.
+
+./downsample.py training.csv 2000 2000
+
+## Blacklist Prediction
+
+Once you have training and prediction datasets, you can simply run the classifyWholeGenome bash script to create a bedGraph file.
+
+./classifyWholeGenome.sh training.csv predict.csv ../featurePipeline/genomeMaps/hg19.map
+
+This will output a file named predicted_blacklist_sorted.bedGraph that contains a list of regions and the predicted probability that region is a blacklist region.
