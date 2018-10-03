@@ -6,54 +6,36 @@
 
 There are two configuration files for the freature pipeline: config/pipeline_config.sh is used for general configuration, and is always loaded. The other configuration file is passed in as a parameter to pipeline.sh and can be used for run specific parameters. These are normally stored in featurePipeline/configurations.
 
+```bash
 config/pipeline_config.sh example:
-
 #PROC_POOL_SIZE=12
-
 FREE_PROCS=2
-
 PROC_POOL_SIZE=$(nproc)
-
 PROC_POOL_SIZE=$(($PROC_POOL_SIZE-$FREE_PROCS))
 
-
 DATA_FILE="data.dat"
-
 DATA_CSV="data.csv"
-
 BLACKLIST_CLASS="blacklist"
-
 NORMAL_CLASS="normal"
-
 GAPS="gaps_sorted.bed"
-
 GENES="genes_sorted.bed"
-
 REPEATS="repeatMasker_sorted.bed"
-
 ALIGNABILTY75="alignability75"
-
 DATA_PATH="/thesis/ThesisData"
-
 RAM_DISK="/media/ramdisk"
-
 FASTA_AND_INDEX="combined"
-
+```
 
 Per-run configuration example:
 
+```bash
 #!/bin/bash
-
 export GENOME_VERSION="hg19"
-
 export BLACKLIST_BED="$BLACKLISTS/Anshul_Hg19UltraHighSignalArtifactRegions.bed"
-
 export WINDOW_SIZE=1000
-
 export OVERLAP_WINDOW=0.7
-
 export NUM_SAMPLES=4000000
-
+```
 
 Make sure that there is a folder in DATA_PATH with the same name as GENOME_VERSION.
 
@@ -61,11 +43,11 @@ Make sure that there is a folder in DATA_PATH with the same name as GENOME_VERSI
 
 To run the pipline in training dataset gathering mode, use the test parameter.
 
-./pipeline.sh test configurations/hg19_kundaje_1000bp.sh
+`./pipeline.sh test configurations/hg19_kundaje_1000bp.sh`
 
 If you are gathering unlabeled windows (without an existing blacklist) use the predict parameter instead.
 
-./pipeline.sh predict configurations/hg19_kundaje_1000bp.sh
+`./pipeline.sh predict configurations/hg19_kundaje_1000bp.sh`
 
 ### Feature Pipeline Output
 
@@ -97,21 +79,21 @@ We need both a labeled training/testing set and an unlabeled whole genome datase
 
 Next we need to split this data.csv file into training and testing datasets. You can do this using a python script in the learning directory.
 
-./splitDataset.py data.csv 0.5
+`./splitDataset.py data.csv 0.5`
 
 This will create a training.csv and a testing.csv. Next we will switch the class labels from the ids of blacklist regions (e.g. "chrA_1000_2000") to simply "blacklist". You can do this with the mergeClassLabels python script.
 
-./mergeClassLabels.py training.csv
-./mergeClassLabels.py testing.csv
+`./mergeClassLabels.py training.csv`
+`./mergeClassLabels.py testing.csv`
 
 To make a managable final training set, down sample to 2000 blacklist items and 2000 normal items.
 
-./downsample.py training.csv 2000 2000
+`./downsample.py training.csv 2000 2000`
 
 ## Blacklist Prediction
 
 Once you have training and prediction datasets, you can simply run the classifyWholeGenome bash script to create a bedGraph file.
 
-./classifyWholeGenome.sh training.csv predict.csv ../featurePipeline/genomeMaps/hg19.map
+`./classifyWholeGenome.sh training.csv predict.csv ../featurePipeline/genomeMaps/hg19.map`
 
 This will output a file named predicted_blacklist_sorted.bedGraph that contains a list of regions and the predicted probability that region is a blacklist region.
