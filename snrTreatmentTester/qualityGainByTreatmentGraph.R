@@ -3,7 +3,7 @@ library(reshape2)
 options(echo=TRUE)
 args <- commandArgs(trailingOnly = TRUE)
 qualityDataFile <- args[1]
-#qualityDataFile <- "/thesis/workspace/peakPass/snrTreatmentTester/completeData/all_quality_data.csv"
+#qualityDataFile <- "/thesis/workspace/peakPass/snrTreatmentTester/completeData/all_quality_gain_data.csv"
 qualityData <- read.csv(qualityDataFile, header = TRUE)
 qualityDataShaped <- melt(qualityData,id.vars='treatmentName', measure.vars=c('rscGain'))
 
