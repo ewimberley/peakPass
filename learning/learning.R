@@ -40,7 +40,7 @@ predictAndPrintConfusion <- function(model, dataSet){
   } else {
     testPredict <- predict(model, dataSet, type="class")
   }
-  testConfMatrix <- confusionMatrix(testPredict, dataSet$classLabel)
+  testConfMatrix <- confusionMatrix(factor(testPredict), dataSet$classLabel)
   testConfMatrix
   return(testConfMatrix)
 }
@@ -90,7 +90,7 @@ if (length(args)!=0) {
 }
 
 #load training data
-trainingFile <- "/thesis/workspace/thesis/manuscript/data/hg19/kundaje/training.csv"
+trainingFile <- "/thesis/workspace/peakPass/learning/training_0_downsampled.csv"
 if (length(args)!=0) {
   trainingFile <- args[3]
 }
@@ -98,7 +98,7 @@ trainingDataRaw <- read.csv(trainingFile, header = TRUE)
 training <- subset(trainingDataRaw, , -c(1))
 
 #load testing data
-testingFile <- "/thesis/workspace/thesis/manuscript/data/hg19/kundaje/testingSubsetBalanced.csv"
+testingFile <- "/thesis/workspace/peakPass/learning/testing_0.csv"
 if (length(args)!=0) {
   testingFile <- args[4]
 }
