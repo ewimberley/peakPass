@@ -3,20 +3,20 @@ PROC_POOL_SIZE=23
 
 DATASET_DIR=/highspeed/hg19ChipSeqDataSets
 
-#hg19 predicted blacklist 40%
-#FILTERED_DIR=/bigdisk/hg19ChipSeq40FilteredDataSets
-#BLACKLIST=hg19PredictedBlacklist40Percent.bed
-
 #hg19 predicted blacklist 50%
-#FILTERED_DIR=/bigdisk/hg19ChipSeq50FilteredDataSets
-#BLACKLIST=hg19PredictedBlacklist50Percent.bed
+#FILTERED_DIR=/bigdisk/hg19GRCh38PeakPass50FilteredDataSets
+#BLACKLIST=../blacklists/peakPass50Perc.bed
 
-#Wg concensses
-#FILTERED_DIR=/bigdisk/hg19ChipSeqWgFilteredDataSets
-#BLACKLIST=../blacklists/wgEncodeHg19ConsensusSignalArtifactRegions.bed 
+#hg19 predicted blacklist 60%
+FILTERED_DIR=/bigdisk/hg19GRCh38PeakPass60FilteredDataSets
+BLACKLIST=../blacklists/peakPass60Perc.bed
 
-FILTERED_DIR=/bigdisk/hg19ChipSeqEncodePlusPeakPassFilteredDataSets
-BLACKLIST=encodePlusPeakPass.bed
+#ENCODE
+#FILTERED_DIR=/bigdisk/hg19GRCh38EncodeFilteredDataSets
+#BLACKLIST=../blacklists/hg38.blacklist.bed
+
+#FILTERED_DIR=/bigdisk/hg19GRCh38PeakPassPlusEncodeFilteredDataSets
+#BLACKLIST=../blacklists/peakPassPlusEncode.bed
 
 ###########
 #Run filter

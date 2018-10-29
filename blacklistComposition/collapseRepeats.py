@@ -36,8 +36,11 @@ def main(argv):
        totalRegionsLength = totalRegionsLength + regionLengths[region]
    #print totalRegionsLength
    print "repeat,frequency"
+   totalRepeatCounts = 0
    for repeat in repeatCounts:
-       print repeat + ',' + "{0:.4f}".format(float(repeatCounts[repeat]) / float(totalRegionsLength) * 1000.0)
+       totalRepeatCounts = totalRepeatCounts + repeatCounts[repeat]
+       print repeat + ',' + "{:.20f}".format(float(repeatCounts[repeat]) / float(totalRegionsLength) * 1000.0)
+   print "all," + "{:.20f}".format(float(totalRepeatCounts) / float(totalRegionsLength) * 1000.0)
 
 if __name__ == "__main__":
    main(sys.argv[1:])

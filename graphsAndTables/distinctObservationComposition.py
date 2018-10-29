@@ -22,8 +22,9 @@ def main(argv):
          target = columns[4].rstrip().lstrip()
          cellLine = columns[5].rstrip().lstrip()
          lab = columns[6].rstrip().lstrip()
-         phantomPeak = columns[len(columns)-1].lstrip().rstrip()
-         if phantomPeak.lower() == "yes":
+         phantomPeak = columns[len(columns)-3].lstrip().rstrip()
+         refGenome = columns[len(columns)-2].lstrip().rstrip()
+         if phantomPeak.lower() == "yes" and refGenome == "GRCh38":
              numReplicates = numReplicates + 1
              experiments[experiment] = 1 if experiment not in experiments else experiments[experiment] + 1   
              targets[target] = 1 if target not in targets else targets[target] + 1
