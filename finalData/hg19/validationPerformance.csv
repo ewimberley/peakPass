@@ -1,4 +1,4 @@
-Algorithm,Sensitivity,Specificity,Precision,FMeasure,NormalPrecision,NormalFMeasure,AUCROC
+Algorithm,Sensitivity,Specificity,Precision,FMeasure,NormalPrecision,NormalFMeasure,AUCROC,AUCPR
 rpart,0.939,0.921,0.0406,0.0778,1,0.959,0.937,0.485
 rpart,0.91,0.946,0.0471,0.0896,1,0.972,0.957,0.465
 rpart,0.905,0.953,0.0703,0.13,1,0.976,0.935,0.051

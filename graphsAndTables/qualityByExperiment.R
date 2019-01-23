@@ -17,7 +17,7 @@ datasets <- hg38
 
 
 
-png(file = "libraryQualityComposition.png")
+png(file = "libraryQualityComposition.png",height=400,width=800)
 datasets$bottleNecking <- replace(as.character(datasets$bottleNecking), datasets$bottleNecking == "severe", "poor")
 y <- melt(data = datasets, id.vars = "alignmentFile", measure.vars = c("libraryComplexity", "bottleNecking","readDepth","readLength"))
 

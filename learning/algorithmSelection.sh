@@ -6,7 +6,7 @@ FREE_PROCS=3
 PROC_POOL_SIZE=$(nproc)
 PROC_POOL_SIZE=$(($PROC_POOL_SIZE-$FREE_PROCS))
 DATASET_NUM=0
-echo "Algorithm,Sensitivity,Specificity,Precision,FMeasure,NormalPrecision,NormalFMeasure,AUCROC" > $1
+echo "Algorithm,Sensitivity,Specificity,Precision,FMeasure,NormalPrecision,NormalFMeasure,AUCROC,AUCPR" > $1
 rm commands.txt
 for (( i=1; i<=$1; i++ ))
 do
