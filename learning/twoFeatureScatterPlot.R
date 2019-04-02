@@ -5,7 +5,7 @@ options(echo=TRUE)
 args <- commandArgs(trailingOnly = TRUE)
 
 #load training data
-trainingFile <- "/thesis/workspace/thesis/manuscript/data/hg19/kundaje/training.csv"
+trainingFile <- "/thesis/workspace/peakPass/learning/hg19/training_0_downsampled.csv"
 featureA <- "monomerRepeats"
 featureB <- "twomerRepeats"
 if (length(args)!=0) {

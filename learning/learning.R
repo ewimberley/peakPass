@@ -90,7 +90,7 @@ if (length(args)!=0) {
 }
 
 #load training data
-trainingFile <- "/thesis/workspace/peakPass/learning/training_0_downsampled.csv"
+trainingFile <- "/thesis/workspace/peakPass/learning/hg19/training_0_downsampled.csv"
 if (length(args)!=0) {
   trainingFile <- args[3]
 }

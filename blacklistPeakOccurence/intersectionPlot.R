@@ -16,9 +16,9 @@ data <- data[data$ExperimentId %in% withPhantomPeak, ]
 
 data <- transform(data, PercentIntersecting = NumIntersectingPeaks/ NumPeaks * 100)
 
-png(file = "IntersectingPeaks.png")
+png(file = "IntersectingPeaks.png", width = 6.25, height = 5, units = 'in', res=800)
 density <- density(data$PercentIntersecting)
-plot(density, main="Percentage Final Peaks Intersecting with PeakPass Regions", xlim=c(0, 1.1))
+plot(density, xlab="Percentage Overlapping Peaks", ylab="Density", main="Percentage Final Peaks Intersecting with PeakPass Regions", xlim=c(0, 1.1), cex.axis=1.2, cex.lab=1.5)
 #colnames(nscData)[2] <- "Treatment"
 #colnames(nscData)[3] <- "NSC"
 #means <- aggregate(NSC ~  Treatment, nscData, mean)

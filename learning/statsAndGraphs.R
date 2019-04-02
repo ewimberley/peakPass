@@ -8,7 +8,7 @@ args <- commandArgs(trailingOnly = TRUE)
 trainingFile <- args[1]
 if(is.na(trainingFile)){
   #for testing only
-  trainingFile <- "/thesis/workspace/thesis/manuscript/data/hg19/kundaje/tuning.csv"
+  trainingFile <- "/thesis/workspace/peakPass/learning/hg19/training_0_downsampled.csv"
 }
 training <- read.csv(trainingFile, header = TRUE)
 sapply(training, class)

@@ -24,7 +24,7 @@ holmTest <- pairwise.t.test(value, variable, paired = TRUE, alternative=c("great
 holmTest
 detach(nscData)
 
-png(file = "NSCByTreatment.png")
+png(file = "NSCByTreatment.png", width = 6.25, height = 5, units = 'in', res=800)
 colnames(nscData)[2] <- "Treatment"
 colnames(nscData)[3] <- "NSC"
 means <- aggregate(NSC ~  Treatment, nscData, mean)
@@ -40,12 +40,12 @@ holmTest <- pairwise.t.test(value, variable, paired = TRUE, alternative=c("great
 holmTest
 detach(rscData)
 
-png(file = "RSCByTreatment.png")
+png(file = "RSCByTreatment.png", width = 6.25, height = 5, units = 'in', res=800)
 colnames(rscData)[2] <- "Treatment"
 colnames(rscData)[3] <- "RSC"
 means <- aggregate(RSC ~  Treatment, rscData, mean)
 p <- ggplot(rscData) + geom_violin(aes(x=Treatment, y=RSC)) + geom_boxplot(aes(x=Treatment, y=RSC), width=0.1) + labs(title="RSC By Treatment") 
-p <- p + theme(axis.text.x = element_text(angle = 45, hjust = 1), plot.title = element_text(hjust = 0.5)) + geom_text(data = means, aes(label = round(RSC, digits = 3), y = RSC, x = Treatment))
-p + annotate("text", label=paste("N=", length(hg38)), x=1.5, y=1.3)
+p <- p + theme(text = element_text(size=20), axis.text.x = element_text(angle = 45, hjust = 1, size=12), plot.title = element_text(hjust = 0.5, size = 14, face = "bold")) + geom_text(size = 5, data = means, aes(label = round(RSC, digits = 3), y = RSC+0.5, x = Treatment))
+p + annotate("text", label=paste("N=", length(hg38)), x=1.5, y=2, size=8)
 # + annotate("text", label=paste("p-value: ", holmTest$p.value[1][1]), x=2, y=1)
 dev.off()
