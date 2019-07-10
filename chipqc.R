@@ -8,58 +8,48 @@
 #BiocManager::install("TxDb.Hsapiens.UCSC.hg38.knownGene")
 #BiocManager::install("GenomicRanges")
 #BiocManager::install(c("GenomicFeatures", "AnnotationDbi"))
+
 library(ChIPQC)
 library(TxDb.Hsapiens.UCSC.hg38.knownGene)
 library(labeling)
 
-library(foreach)
-library(doParallel)
-
-cl <- makeCluster(18)
-registerDoParallel(cl)
+args <- commandArgs(trailingOnly = TRUE)
+sampleIndex <- as.numeric(args[1])
+treatment <- args[2]
+treatmentDir <- args[3]
 
 samples <- read.csv("/thesis/workspace/peakPass/chipqcConfig.csv", header = TRUE)
-chromosomesToTest <- c(paste0("chr",c(1:22,"X","Y")))
-setwd("/thesis/workspace/peakPass/")
-treatments <- c("control", "ENCODE", "PeakPass")
-treatmentDirs <- c("/storage/hg19ChipSeqDataSets/", "/bigdisk/hg19GRCh38EncodeFilteredDataSets", "/bigdisk/hg19GRCh38PeakPass60FilteredDataSets")
-peaksDir <- "/highspeed/hg19ChipSeqPeakSets/"
 
-#results <- data.frame("treatment" = c(), "sampleId" = c(), "SSD" = c())
+chromosomesToTest <- c(paste0("chr",c(1:22,"X","Y")))
+#setwd("/thesis/workspace/peakPass/")
+#treatments <- c("control", "ENCODE", "PeakPass")
+#treatmentDirs <- c("/storage/hg19ChipSeqDataSets", "/bigdisk/hg19GRCh38EncodeFilteredDataSets", "/bigdisk/hg19GRCh38PeakPass60FilteredDataSets")
+peaksDir <- "/highspeed/hg19ChipSeqPeakSets/"
 columns <- c("treatment", "sampleId", "SSD", "NRF", "FRiP", "FractionLongPromoter20000to2000", "FractionPromoter2000to500", "FractionPromoter500", "FractionAllTranscripts", "FractionAllIntrons")
-results <- matrix(ncol = length(columns), nrow = 0)
-for(i in 1:length(treatments)){
-  resultRows <- foreach(j=1:nrow(samples), .combine=rbind, .packages = c("ChIPQC", "TxDb.Hsapiens.UCSC.hg38.knownGene", "labeling")) %dopar% {
-  #for(j in 1:nrow(samples)) {
-    samples <- read.csv("/thesis/workspace/peakPass/chipqcConfig.csv", header = TRUE)
-    chromosomesToTest <- c(paste0("chr",c(1:22,"X","Y")))
-    setwd("/thesis/workspace/peakPass/")
-    treatments <- c("control", "ENCODE", "PeakPass")
-    treatmentDirs <- c("/storage/hg19ChipSeqDataSets/", "/bigdisk/hg19GRCh38EncodeFilteredDataSets", "/bigdisk/hg19GRCh38PeakPass60FilteredDataSets")
-    peaksDir <- "/highspeed/hg19ChipSeqPeakSets/"
-    
-    id <- as.character(samples$SampleId[j])
-    bam <- as.character(samples$bamReads[j])
-    peaks <- as.character(samples$Peaks[j])
-    sample = ChIPQCsample(paste(treatmentDirs[i], bam, sep = "/"), runCrossCor = TRUE, chromosomes=chromosomesToTest, annotation = "hg38", peaks = paste(peaksDir, "ENCFF446MUL.bed", sep = "/"))
-    mapped <- sample@FlagAndTagCounts[2]
-    redundant <- sample@FlagAndTagCounts[6]
-    frip <- sample@CountsInPeaks / mapped
-    nrf <- redundant / mapped
-    ssd <- sample@SSD
-    #plot(density(as.numeric(unlist(sample@ranges@width))))
-    row <- c(treatments[i], id, ssd, nrf, frip, sample@PropInFeatures[1], sample@PropInFeatures[2], sample@PropInFeatures[3], sample@PropInFeatures[5], sample@PropInFeatures[7])
-    #results <- rbind(results, row)
-    print(row)
-  }
-  results <- rbind(results, resultRows)
-}
-#resultsDf <- data.frame(results)
+#tmpResults <- matrix(ncol = length(columns), nrow = 0)
+
+#for(i in 1:length(treatments)){
+id <- as.character(samples$SampleId[sampleIndex])
+bam <- as.character(samples$bamReads[sampleIndex])
+peaks <- as.character(samples$Peaks[sampleIndex])
+sample = ChIPQCsample(paste(treatmentDir, bam, sep = "/"), runCrossCor = TRUE, chromosomes=chromosomesToTest, annotation = "hg38", peaks = paste(peaksDir, peaks, sep = "/"))
+mapped <- sample@FlagAndTagCounts[2]
+redundant <- sample@FlagAndTagCounts[6]
+frip <- sample@CountsInPeaks / mapped
+nrf <- redundant / mapped
+ssd <- sample@SSD
+#plot(density(as.numeric(unlist(sample@ranges@width))))
+row <- c(treatment, id, ssd, nrf, frip, sample@PropInFeatures[1], sample@PropInFeatures[2], sample@PropInFeatures[3], sample@PropInFeatures[5], sample@PropInFeatures[7])
+#tmpResults <- rbind(tmpResults, row)
+#print(row)
+#}
+#results <- rbind(results, resultRows)
+resultsDf <- data.frame(row)
 colnames(resultsDf) <- columns
 
-write.csv(resultsDf, file="chipQCResults.csv")
+write.table(resultsDf, file="/thesis/workspace/peakPass/chipQCResults.csv", row.names=FALSE, col.names=FALSE, quote=FALSE, sep=",", append = TRUE)
 
-stopCluster(cl)
+#stopCluster(cl)
 
 #sample = ChIPQCsample("/storage/hg19ChipSeqDataSets/ENCFF900RPG.bam", runCrossCor = TRUE, chromosomes=chromosomesToTest, annotation = "hg38", peaks = "/highspeed/hg19ChipSeqPeakSets/ENCFF446MUL.bed")
 #qplot(seq(1:300), sample@CrossCorrelation, geom = "smooth", span=0.1)
