@@ -8,8 +8,8 @@ do
 	echo "samtools sort $NAME.bam -o $NAME.sorted.bam" >> commands.txt
 done
 
-#cat commands.txt | xargs -t -I CMD --max-procs=$PROC_POOL_SIZE bash -c CMD
-#rm commands.txt
+cat commands.txt | xargs -t -I CMD --max-procs=$PROC_POOL_SIZE bash -c CMD
+rm commands.txt
 
 for f in *.bam
 do
@@ -20,8 +20,8 @@ do
 	fi
 done
 
-#cat commands.txt | xargs -t -I CMD --max-procs=$PROC_POOL_SIZE bash -c CMD
-#rm commands.txt
+cat commands.txt | xargs -t -I CMD --max-procs=$PROC_POOL_SIZE bash -c CMD
+rm commands.txt
 
 for f in *.sorted.bam.bai
 do
