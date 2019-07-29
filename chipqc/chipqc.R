@@ -18,33 +18,41 @@ sampleIndex <- as.numeric(args[1])
 treatment <- args[2]
 treatmentDir <- args[3]
 
-samples <- read.csv("/thesis/workspace/peakPass/chipqcConfig.csv", header = TRUE)
+samples <- read.csv("/thesis/workspace/peakPass/chipqc/chipqcConfig.csv", header = TRUE)
 
 chromosomesToTest <- c(paste0("chr",c(1:22,"X","Y")))
 #setwd("/thesis/workspace/peakPass/")
 #treatments <- c("control", "ENCODE", "PeakPass")
 #treatmentDirs <- c("/storage/hg19ChipSeqDataSets", "/bigdisk/hg19GRCh38EncodeFilteredDataSets", "/bigdisk/hg19GRCh38PeakPass60FilteredDataSets")
 peaksDir <- "/highspeed/hg19ChipSeqPeakSets/"
-columns <- c("treatment", "sampleId", "SSD", "NRF", "FRiP", "FractionLongPromoter20000to2000", "FractionPromoter2000to500", "FractionPromoter500", "FractionAllTranscripts", "FractionAllIntrons")
+columns <- c("treatment", "sampleId", "SSD", "NRF", "FRiP", "PeakWidthSD", "ReadsPerPeakSD", "FractionLongPromoter20000to2000", "FractionPromoter2000to500", "FractionPromoter500", "FractionAllTranscripts", "FractionAllIntrons")
 #tmpResults <- matrix(ncol = length(columns), nrow = 0)
 
 #for(i in 1:length(treatments)){
 id <- as.character(samples$SampleId[sampleIndex])
-bam <- as.character(samples$bamReads[sampleIndex])
+#bam <- as.character(samples$bamReads[sampleIndex])
+bam <- paste0(as.character(samples$SampleId[sampleIndex]), ".sorted.bam")
 peaks <- as.character(samples$Peaks[sampleIndex])
-sample = ChIPQCsample(paste(treatmentDir, bam, sep = "/"), runCrossCor = TRUE, chromosomes=chromosomesToTest, annotation = "hg38", peaks = paste(peaksDir, peaks, sep = "/"))
+sample = ChIPQCsample(paste(treatmentDir, bam, sep = "/"), runCrossCor = TRUE, mapQCth = 0, chromosomes=chromosomesToTest, annotation = "hg38", peaks = paste(peaksDir, peaks, sep = "/"))
 mapped <- sample@FlagAndTagCounts[2]
 redundant <- sample@FlagAndTagCounts[6]
 frip <- sample@CountsInPeaks / mapped
 nrf <- redundant / mapped
 ssd <- sample@SSD
+peakWidthStandardDeviation <- sd(sample@ranges@width)
+readsPerPeakStandardDeviation <- sd(sample@elementMetadata@listData$Counts)
+FractionLongPromoter20000to2000 <- sample@CountsInFeatures$LongPromoter20000to2000 / mapped
+FractionPromoter2000to500 <- sample@CountsInFeatures$Promoters2000to500 / mapped
+FractionPromoter500 <- sample@CountsInFeatures$Promoters500 / mapped
+FractionAllTranscripts <- sample@CountsInFeatures$Alltranscripts / mapped
+FractionAllIntrons <- sample@CountsInFeatures$Allintrons / mapped
 #plot(density(as.numeric(unlist(sample@ranges@width))))
-row <- c(treatment, id, ssd, nrf, frip, sample@PropInFeatures[1], sample@PropInFeatures[2], sample@PropInFeatures[3], sample@PropInFeatures[5], sample@PropInFeatures[7])
+row <- c(treatment, id, ssd, nrf, frip, peakWidthStandardDeviation, readsPerPeakStandardDeviation, FractionLongPromoter20000to2000, FractionPromoter2000to500, FractionPromoter500, FractionAllTranscripts, FractionAllIntrons)
 #tmpResults <- rbind(tmpResults, row)
 #print(row)
 #}
 #results <- rbind(results, resultRows)
-resultsDf <- data.frame(row)
+resultsDf <- data.frame(t(row))
 colnames(resultsDf) <- columns
 
 write.table(resultsDf, file="/thesis/workspace/peakPass/chipQCResults.csv", row.names=FALSE, col.names=FALSE, quote=FALSE, sep=",", append = TRUE)

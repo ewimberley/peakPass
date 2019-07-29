@@ -19,12 +19,12 @@ trainingDataRaw <- read.csv(trainingFile, header = TRUE)
 #trainingSplit <- split(trainingDataRaw, trainingDataRaw$classLabel)
 png(file = "threeFeatureScatterPlot.png", width = 6, height = 6, units = 'in', res=600)
 #scatter3D(trainingSplit$blacklist[[featureA]], trainingSplit$blacklist[[featureB]], col=alpha("red", 0.4), xlab=featureA, ylab=featureB)
-#points3D(trainingSplit$normal[[featureA]], trainingSplit$normal[[featureB]], col=alpha("black", 0.4))
+#points3D(trainingSplit$normal[[featureA]], trainingSplit$normal[[featureB]], col=alpha("blue", 0.4))
 attach(trainingDataRaw)
 scatter3D(trainingDataRaw[[featureA]], trainingDataRaw[[featureB]], trainingDataRaw[[featureC]], bty = "g", pch = 1, 
           colvar = as.integer(trainingDataRaw[["classLabel"]]), 
           xlab = featureA, ylab = featureB, zlab = featureC,
-          col = c(alpha("red", 0.05), alpha("black", 0.05)),
+          col = c(alpha("red", 0.05), alpha("blue", 0.05)),
           colkey = list(at = c(2, 3), side = 1, 
                         addlines = TRUE, length = 0.5, width = 0.5,
                         labels = c("blacklist", "normal")) )

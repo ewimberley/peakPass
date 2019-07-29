@@ -1,0 +1,10 @@
+SampleId,experimentId,peaksId,replicate,target,cellLine,lab,filtered,libraryComplexity,bottleNecking,readDepth,readLength,phantomPeak,refGenome,refAvailable,bamReads,Peaks
+ENCFF706HJC,ENCSR920BLG,ENCFF446MUL,1,SIN3A,K562,Michael Snyder,no,moderate,moderate,moderate,moderate,yes,GRCh38,both,ENCFF706HJC.bam,ENCFF446MUL.bed
+ENCFF900RPG,ENCSR920BLG,ENCFF446MUL,2,SIN3A,K562,Michael Snyder,no,moderate,moderate,moderate,moderate,yes,GRCh38,both,ENCFF900RPG.bam,ENCFF446MUL.bed
+ENCFF061DUL,ENCSR286PCG,ENCFF619KWZ,1,ZBED1,K562,Richard Myers,no,good,good,good,good,yes,GRCh38,both,ENCFF061DUL.bam,ENCFF619KWZ.bed
+ENCFF061RFH,ENCSR286PCG,ENCFF619KWZ,2,ZBED1,K562,Richard Myers,no,good,good,good,good,yes,GRCh38,both,ENCFF061RFH.bam,ENCFF619KWZ.bed
+ENCFF280WMP,ENCSR000FBC,ENCFF702EGB,1,STAT2,K562,Sherman Weissman,no,good,good,poor,poor,yes,GRCh38,both,ENCFF280WMP.bam,ENCFF702EGB.bed
+ENCFF693OEL,ENCSR000FBC,ENCFF702EGB,2,STAT2,K562,Sherman Weissman,no,good,good,poor,poor,yes,GRCh38,both,ENCFF693OEL.bam,ENCFF702EGB.bed
+ENCFF877JAH,ENCSR000FAZ,ENCFF695KNI,1,MYC,K562,Sherman Weissman,no,good,good,moderate,moderate,yes,GRCh38,both,ENCFF877JAH.bam,ENCFF695KNI.bed
+ENCFF701IFH,ENCSR000FAZ,ENCFF695KNI,2,MYC,K562,Sherman Weissman,no,good,good,moderate,moderate,yes,GRCh38,both,ENCFF701IFH.bam,ENCFF695KNI.bed
+ENCFF506MFX,ENCSR000DKR,ENCFF892KUY,2,CTCF,GM10266,Vishwanath Iyer,no,good,moderate,moderate,good,yes,GRCh38,both,ENCFF506MFX.bam,ENCFF892KUY.bed

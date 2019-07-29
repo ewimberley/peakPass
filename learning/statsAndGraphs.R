@@ -14,7 +14,7 @@ training <- read.csv(trainingFile, header = TRUE)
 sapply(training, class)
 numFeatures <- ncol(training) 
 
-colors <- c("red", "blue")
+colors <- c("black", "blue")
 labels <- c("Blacklist", "Normal")
 plotFeature <- function(featureData, fileName, title, xLab, legendPos){
   dataSplit <- split(featureData, training$classLabel)
@@ -42,7 +42,7 @@ plotFeature <- function(featureData, fileName, title, xLab, legendPos){
   rug(jitter(dataSplit$blacklist), col=colors[1], line=0)
   rug(jitter(dataSplit$normal), col=colors[2], line=1)
   
-  abline(v = mean(dataSplit$blacklist), col = "red", lwd = 2, lty=3)
+  abline(v = mean(dataSplit$blacklist), col = "black", lwd = 2, lty=3)
   abline(v = mean(dataSplit$normal), col = "blue", lwd = 2, lty=3)
   
   legend(legendPos, inset=.01, title="Class Label",
