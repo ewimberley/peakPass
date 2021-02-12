@@ -1,5 +1,5 @@
 #!/bin/bash
-export BLACKLIST_BED="excludedlists/Anshul_Hg19UltraHighSignalArtifactRegions.bed"
+export EXCLUDED_LIST_BED="excludedlists/Anshul_Hg19UltraHighSignalArtifactRegions.bed"
 export WINDOW_SIZE=2000
 export GENOME_MAP="genomeMaps/hg19.map"
 export GENOME_FASTA="/mnt/RAM_disk/hg19/hg19Combined/hg19.fa"

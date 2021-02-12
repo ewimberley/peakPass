@@ -5,24 +5,24 @@ DATASET_DIR=/highspeed/hg19ChipSeqDataSets
 
 #hg19 predicted excluded 50%
 #FILTERED_DIR=/bigdisk/hg19GRCh38PeakPass50FilteredDataSets
-#BLACKLIST=../excludedlists/peakPass50Perc.bed
+#EXCLUDED=../excludedlists/peakPass50Perc.bed
 
 #hg19 predicted excluded 60%
 FILTERED_DIR=/bigdisk/hg19GRCh38PeakPass60FilteredDataSets
-BLACKLIST=../excludedlists/peakPass60Perc.bed
+EXCLUDED=../excludedlists/peakPass60Perc.bed
 
 #ENCODE
 #FILTERED_DIR=/bigdisk/hg19GRCh38EncodeFilteredDataSets
-#BLACKLIST=../excludedlists/hg38.excluded.bed
+#EXCLUDED=../excludedlists/hg38.excluded.bed
 
 #FILTERED_DIR=/bigdisk/hg19GRCh38PeakPassPlusEncodeFilteredDataSets
-#BLACKLIST=../excludedlists/peakPassPlusEncode.bed
+#EXCLUDED=../excludedlists/peakPassPlusEncode.bed
 
 ###########
 #Run filter
 ###########
 rm commands.txt
-./runAllFilters.py $DATASET_DIR/datasets.csv $DATASET_DIR $FILTERED_DIR $BLACKLIST
+./runAllFilters.py $DATASET_DIR/datasets.csv $DATASET_DIR $FILTERED_DIR $EXCLUDED
 cat commands.txt | xargs -t -I CMD --max-procs=$PROC_POOL_SIZE bash -c CMD
 
 ###################################

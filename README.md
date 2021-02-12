@@ -40,7 +40,7 @@ Per-run configuration example:
 ```bash
 #!/bin/bash
 export GENOME_VERSION="hg19"
-export BLACKLIST_BED="$BLACKLISTS/Anshul_Hg19UltraHighSignalArtifactRegions.bed"
+export EXCLUDED_LIST_BED="$EXCLUDED/Anshul_Hg19UltraHighSignalArtifactRegions.bed"
 export WINDOW_SIZE=1000
 export OVERLAP_WINDOW=0.7
 export NUM_SAMPLES=4000000
