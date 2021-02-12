@@ -79,7 +79,7 @@ Next we need to split this data.csv file into training and testing datasets. You
 
 `./splitDataset.py data.csv 0.5`
 
-This will create a training.csv and a testing.csv. Next we will switch the class labels from the ids of escluded regions (e.g. "chrA_1000_2000") to simply "excluded". You can do this with the mergeClassLabels python script.
+This will create a training.csv and a testing.csv. Next we will switch the class labels from the ids of excluded regions (e.g. "chrA_1000_2000") to simply "excluded". You can do this with the mergeClassLabels python script.
 
 ```bash
 ./mergeClassLabels.py training.csv
