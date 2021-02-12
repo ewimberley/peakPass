@@ -5,6 +5,7 @@ PROC_POOL_SIZE=$(($PROC_POOL_SIZE-$FREE_PROCS))
 
 DATA_FILE="data.dat"
 DATA_CSV="data.csv"
+EXCLUDED_LIST_CLASS="excluded"
 EXCLUDED_CLASS="excluded"
 NORMAL_CLASS="normal"
 GAPS="gaps_sorted.bed"
