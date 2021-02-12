@@ -31,6 +31,6 @@ if (length(args)!=0) {
 }
 trainingDataRaw <- read.csv(trainingFile, header = TRUE)
 trainingSplit <- split(trainingDataRaw, trainingDataRaw$classLabel)
-trainingJitter <- data.frame(lapply(trainingSplit$blacklist, jitterNumericNormalDist))
-plot(trainingSplit$blacklist$monomerRepeats, trainingSplit$blacklist$twomerRepeats, col="black", xlim=c(50,225), ylim=c(0,100))
+trainingJitter <- data.frame(lapply(trainingSplit$excluded, jitterNumericNormalDist))
+plot(trainingSplit$excluded$monomerRepeats, trainingSplit$excluded$twomerRepeats, col="blue", xlim=c(50,225), ylim=c(0,100))
 points(trainingJitter$monomerRepeats, trainingJitter$twomerRepeats, col=alpha("red", 0.4))

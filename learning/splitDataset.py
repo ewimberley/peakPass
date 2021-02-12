@@ -18,7 +18,7 @@ def main(argv):
       sys.exit()
    training = open(outputPrefix + "training.csv", "w")
    testing = open(outputPrefix + "testing.csv", "w")
-   blacklistItemsInTraining = {}
+   excludedlistItemsInTraining = {}
    with open(inputfile, 'r') as f:
       header = f.readline()
       training.write(header)
@@ -33,16 +33,16 @@ def main(argv):
             else:
                testing.write(line)
          else:
-            if label not in blacklistItemsInTraining:
+            if label not in excludedlistItemsInTraining:
                datasetPicker = random.uniform(0, 1)
                if datasetPicker < trainingRatio:
-                   blacklistItemsInTraining[label] = True
+                   excludedlistItemsInTraining[label] = True
                    training.write(line)
                else:
-                   blacklistItemsInTraining[label] = False
+                   excludedlistItemsInTraining[label] = False
                    testing.write(line)
             else:
-                if blacklistItemsInTraining[label]:
+                if excludedlistItemsInTraining[label]:
                     training.write(line)
                 else:
                     testing.write(line)

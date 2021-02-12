@@ -13,8 +13,8 @@ colors <- c("black", "red", "blue")
 labels <- c("AUC ROC", "Sensitivity", "Specificity", "Precision", "F-Measure")
 
 normalSampSize <- resultsData$NormalSampleSize[1]
-resultsDataShaped <- melt(resultsData,id.vars='BlacklistSampleSize', measure.vars=c('Sensitivity','Specificity','Precision','FMeasure','AUCROC','AUCPrecisionRecall'))
-resultsDataShaped$BlacklistSampleSize <- resultsDataShaped$BlacklistSampleSize / normalSampSize
+resultsDataShaped <- melt(resultsData,id.vars='ExcludedlistSampleSize', measure.vars=c('Sensitivity','Specificity','Precision','FMeasure','AUCROC','AUCPrecisionRecall'))
+resultsDataShaped$ExcludedlistSampleSize <- resultsDataShaped$ExcludedlistSampleSize / normalSampSize
 colnames(resultsDataShaped)[1] <- "BalanceRatio"
 
 png(file = paste(prefix, "PerformanceByBalance.png", sep="_"))
@@ -24,7 +24,7 @@ ggplot(resultsDataShaped) + geom_boxplot(aes(x=BalanceRatio, y=Value), outlier.s
 dev.off()
 
 
-# minorityToMajorityClassRatio <- resultsData$BlacklistSampleSize/resultsData$NormalSampleSize
+# minorityToMajorityClassRatio <- resultsData$ExcludedlistSampleSize/resultsData$NormalSampleSize
 # aucROC <- resultsData$AUCROC
 # sensitivity <- resultsData$Sensitivity
 # specificity <- resultsData$Specificity

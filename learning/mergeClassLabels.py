@@ -8,7 +8,7 @@ def main(argv):
       inputfile = argv[0]
    else:
       print "Usage mergeClassLabels.py <data csv files>"
-      print "Turn all non-normal class labels into blacklist."
+      print "Turn all non-normal class labels into excluded."
       sys.exit()
    inputFilePrefix = inputfile[:inputfile.index(".")]
    output = open(inputFilePrefix + "_simplified.csv", "w")
@@ -21,7 +21,7 @@ def main(argv):
          if label == "normal":
             output.write(line)
          else:
-            columns[len(columns)-1] = "blacklist"
+            columns[len(columns)-1] = "excluded"
             relabeled = ",".join(columns) + "\n"
             output.write(relabeled)
    output.close()

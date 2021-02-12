@@ -14,11 +14,11 @@ training <- read.csv(trainingFile, header = TRUE)
 sapply(training, class)
 numFeatures <- ncol(training) 
 
-colors <- c("black", "blue")
-labels <- c("Blacklist", "Normal")
+colors <- c("excluded", "blue")
+labels <- c("Excluded", "Normal")
 plotFeature <- function(featureData, fileName, title, xLab, legendPos){
   dataSplit <- split(featureData, training$classLabel)
-  blacklistDensity <- density(dataSplit$blacklist, kernel="gaussian")
+  excludedlistDensity <- density(dataSplit$excludedlist, kernel="gaussian")
   normalDensity <- density(dataSplit$normal, kernel="gaussian")
   
   minX <- min(featureData, na.rm=T)
@@ -28,8 +28,8 @@ plotFeature <- function(featureData, fileName, title, xLab, legendPos){
   minX <- minX - xRangeMargin
   maxX <- maxX + xRangeMargin
   
-  minY <- min(c(unlist(blacklistDensity$y), unlist(normalDensity$y)))
-  maxY <- max(c(unlist(blacklistDensity$y), unlist(normalDensity$y)))
+  minY <- min(c(unlist(excludedlistDensity$y), unlist(normalDensity$y)))
+  maxY <- max(c(unlist(excludedlistDensity$y), unlist(normalDensity$y)))
   yRange <- maxY - minY
   yRangeMargin <- yRange * 0.10
   minY <- minY - yRangeMargin
@@ -37,12 +37,12 @@ plotFeature <- function(featureData, fileName, title, xLab, legendPos){
   xRange <- c(minX, maxX)
 
   png(file = fileName)
-  plot(blacklistDensity, col=colors[1], main=title, xlab=xLab, xlim=xRange, ylim=c(minY,maxY))
+  plot(excludedlistDensity, col=colors[1], main=title, xlab=xLab, xlim=xRange, ylim=c(minY,maxY))
   lines(normalDensity, lwd=2, col=colors[2])
-  rug(jitter(dataSplit$blacklist), col=colors[1], line=0)
+  rug(jitter(dataSplit$excludedlist), col=colors[1], line=0)
   rug(jitter(dataSplit$normal), col=colors[2], line=1)
   
-  abline(v = mean(dataSplit$blacklist), col = "black", lwd = 2, lty=3)
+  abline(v = mean(dataSplit$excludedlist), col = "excluded", lwd = 2, lty=3)
   abline(v = mean(dataSplit$normal), col = "blue", lwd = 2, lty=3)
   
   legend(legendPos, inset=.01, title="Class Label",
@@ -69,7 +69,7 @@ plotFeatureBarXFilter <- function(featureData, fileName, title, legendPos, xlab,
 #print("Data Summary:")
 #summary(training)
 trainingSplit <- split(training, training$classLabel)
-summary(trainingSplit$blacklist)
+summary(trainingSplit$excludedlist)
 summary(trainingSplit$normal)
 
 numericFeatures <- sapply(training, is.numeric)
@@ -120,5 +120,5 @@ plotFeatureBar(training$intersectingRepeats, "feature_density_intersectingRepeat
 dev.off()
 
 #trainingSplit <- split(training, training$classLabel)
-#counts <- c(table(trainingSplit$blacklist$repeatType), table(trainingSplit$normal$repeatType))
+#counts <- c(table(trainingSplit$excludedlist$repeatType), table(trainingSplit$normal$repeatType))
 #barplot(counts, main="Repeat Types by Class Label", xlab="Repeat Types", col=c("darkblue","red"), legend = rownames(counts))

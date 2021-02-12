@@ -1,6 +1,6 @@
 COLUMNS="id"
 GENOME_MAPS="genomeMaps"
-BLACKLISTS="blacklists"
+EXCLUDED="excludedlists"
 TILES_FASTA="tiles.fa"
 TILES_ID_MAP="tiles_id_map.bed"
 EXPANDED_TILES_BED="expanded_tiles.bed"

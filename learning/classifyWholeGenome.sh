@@ -26,7 +26,7 @@ rm ./*.csv.tmp
 loopOverChromosomes "classify $1" 
 cat commands.txt | xargs -t -I CMD --max-procs=$PROC_POOL_SIZE bash -c CMD	
 
-echo "id, class, confidence" > predicted_blacklist.csv
-cat *_predicted_blacklist.csv >> predicted_blacklist.csv
-./csvToBedGraph.py predicted_blacklist.csv > predicted_blacklist.bedGraph
-sortBed -i predicted_blacklist.bedGraph > predicted_blacklist_sorted.bedGraph
+echo "id, class, confidence" > predicted_excludedlist.csv
+cat *_predicted_excludedlist.csv >> predicted_excludedlist.csv
+./csvToBedGraph.py predicted_excludedlist.csv > predicted_excludedlist.bedGraph
+sortBed -i predicted_excludedlist.bedGraph > predicted_excludedlist_sorted.bedGraph

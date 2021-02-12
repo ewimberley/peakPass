@@ -15,11 +15,11 @@ library(DescTools)
 options("width"=600)
 #options(error=traceback)
 
-writeBlacklistToFile <- function(model, dataSet, chromosome){
-  #predictedBlacklist = data.frame("id"="id", "confidence"="confidence")
-  outputFile = paste(chromosome, "predicted_blacklist.csv", sep="_")
+writeExcludedlistToFile <- function(model, dataSet, chromosome){
+  #predictedExcludedlist = data.frame("id"="id", "confidence"="confidence")
+  outputFile = paste(chromosome, "predicted_excludedlist.csv", sep="_")
   #print(outputFile)
-  #write.table(predictedBlacklist, outputFile, row.names=FALSE, col.names=FALSE, quote=FALSE, sep=",", append = TRUE)
+  #write.table(predictedExcludedlist, outputFile, row.names=FALSE, col.names=FALSE, quote=FALSE, sep=",", append = TRUE)
   for (rowIndex in 1:nrow(dataSet)){
     row <- dataSet[rowIndex,]
     predictProb <- predict(model, row, type="prob")
@@ -114,9 +114,9 @@ set.seed(20)
 control <- trainControl(method="repeatedcv", number=10, repeats=3, search="random", summaryFunction=twoClassSummary, classProbs = TRUE)
 metric <- "ROC"
 trainingSplit <- split(training, training$classLabel)
-blacklistSamples <- nrow(trainingSplit$blacklist)
-print("Blacklist samples:")
-print(blacklistSamples)
+excludedlistSamples <- nrow(trainingSplit$excluded)
+print("Excluded samples:")
+print(excludedlistSamples)
 normalSamples <- nrow(trainingSplit$normal)
 print("Normal samples:")
 print(normalSamples)
@@ -125,7 +125,7 @@ if(action == "tuning"){
   if(algorithm == "randomForest"){
     sampleDivision <- 20
     tunegrid <- expand.grid(.mtry=c(2,4,6,8))
-    model <- train(classLabel~., data=training, method="rf", metric=metric, trControl=control, tuneGrid=tunegrid, tuneLength=3, ntree=2000, maxnodes=10, importance=TRUE, sampsize=c((blacklistSamples / sampleDivision),(normalSamples / sampleDivision)))
+    model <- train(classLabel~., data=training, method="rf", metric=metric, trControl=control, tuneGrid=tunegrid, tuneLength=3, ntree=2000, maxnodes=10, importance=TRUE, sampsize=c((excludedlistSamples / sampleDivision),(normalSamples / sampleDivision)))
   } else if(algorithm == "svmRadial") {
     tunegrid <- expand.grid(C=c(0.5,1,2), sigma=c(0.2, 0.5, 1, 1.5, 2, 5))
     model <- train(classLabel~., data=training, method="svmRadial", metric=metric, tuneGrid=tunegrid, tuneLength=3, trControl=control)
@@ -149,11 +149,11 @@ if(action == "tuning"){
 } else {
   if(algorithm == "randomForest"){
     sampleDivision <- 20
-    model <- randomForest(classLabel~., training, mtry=4, ntree=2000, maxnodes = 10, nodesize=1, importance=TRUE, proximity=TRUE, sampsize=c((blacklistSamples / sampleDivision),(normalSamples / sampleDivision)))
+    model <- randomForest(classLabel~., training, mtry=4, ntree=2000, maxnodes = 10, nodesize=1, importance=TRUE, proximity=TRUE, sampsize=c((excludedlistSamples / sampleDivision),(normalSamples / sampleDivision)))
     modelImportance <- importance(model)
     #varImpPlot(model)
     #plot(model, log="y")
-    modelImportanceFrame <- data.frame("features"=rownames(modelImportance), "blacklist"=format(modelImportance[,1], digits=3), "normal"=format(modelImportance[,2], digits=3), "MeanDecreaseAccuracy"=format(modelImportance[,3], digits=3), "MeanDecreaseGini"=format(modelImportance[,4], digits=3))
+    modelImportanceFrame <- data.frame("features"=rownames(modelImportance), "excluded"=format(modelImportance[,1], digits=3), "normal"=format(modelImportance[,2], digits=3), "MeanDecreaseAccuracy"=format(modelImportance[,3], digits=3), "MeanDecreaseGini"=format(modelImportance[,4], digits=3))
     write.table(format(modelImportanceFrame, digits=3), "importance.csv", row.names=FALSE, col.names=TRUE, quote=FALSE, sep=",")
   } else if(algorithm == "svmRadial") {
     model <- ksvm(classLabel~., training, kernel='rbfdot', kpar=list(sigma=0.2), C=2, prob.model=TRUE)
@@ -184,7 +184,7 @@ if(action == "confusionMatrix"){
   write.table(testingConfusionTable, "testing_confusion.csv", row.names=FALSE, col.names=TRUE, quote=FALSE, sep=",")
 } else if(action == "predict"){
   chromosome <- args[5]
-  writeBlacklistToFile(model, testingDataRaw, chromosome);
+  writeExcludedlistToFile(model, testingDataRaw, chromosome);
 } else if(action == "performanceTable"){
   fileName <- args[5]
   testingConfusion <- predictAndPrintConfusion(model, testing)

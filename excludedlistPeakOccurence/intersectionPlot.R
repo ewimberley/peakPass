@@ -4,7 +4,7 @@ library(data.table)
 options(echo=TRUE)
 args <- commandArgs(trailingOnly = TRUE)
 
-dataFile <- "/thesis/workspace/peakPass/blacklistPeakOccurence/blacklistedPeaks.csv"
+dataFile <- "/thesis/workspace/peakPass/excludedPeakOccurence/excludedPeaks.csv"
 #dataFile <- args[1]
 data <- read.csv(dataFile, header = TRUE)
 

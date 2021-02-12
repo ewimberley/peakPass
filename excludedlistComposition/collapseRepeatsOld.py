@@ -9,7 +9,7 @@ def main(argv):
    else:
       print "Usage collapseRepeats.py <bed intersect file>"
       sys.exit()
-   blacklistItems=dict()
+   excludedlistItems=dict()
    repeatSet = set()
    with open(inputfile, 'r') as f:
       f.readline()
@@ -22,22 +22,22 @@ def main(argv):
          key = chrom + "_" + start + "_" + stop
          if repeat not in repeatSet:
             repeatSet.add(repeat)
-         if key not in blacklistItems:
-            blacklistItems[key] = []
-         blacklistItems[key].append(repeat)
+         if key not in excludedlistItems:
+            excludedlistItems[key] = []
+         excludedlistItems[key].append(repeat)
       f.close()
-   header = "blacklistItem"
+   header = "excludedlistItem"
    for repeat in repeatSet:
        header = header + ',' + repeat
    print header
-   for key in blacklistItems:
+   for key in excludedlistItems:
       line = key
       for repeat in repeatSet:
-          if repeat in blacklistItems[key]:
+          if repeat in excludedlistItems[key]:
               line = line + ",t"
           else:
               line = line + ",f"
-      #for item in blacklistItems[key]:
+      #for item in excludedlistItems[key]:
       #   line = line + '\t' + item
       print line
 

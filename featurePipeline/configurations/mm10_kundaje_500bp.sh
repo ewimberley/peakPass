@@ -1,6 +1,6 @@
 #!/bin/bash
 export GENOME_VERSION="mm10"
-export BLACKLIST_BED="$BLACKLISTS/mm10.blacklist.bed"
+export BLACKLIST_BED="$EXCLUDED/mm10.blacklist.bed"
 export WINDOW_SIZE=500
 export OVERLAP_WINDOW=0.7
 export NUM_SAMPLES=4000000

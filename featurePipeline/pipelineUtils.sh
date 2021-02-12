@@ -24,14 +24,14 @@ function tileWholeGenome {
 
 	if [ "$2" = true ] ; then
 		TILES_TMP_BED="tiles_tmp.bed"
-		bedtools intersect -a $TILES_BED -b $BLACKLIST_BED -f 0.6 -wb | awk '{print $1"\t"$2"\t"$3"\t"$4"_"$5"_"$6}' > blacklisted_tiles.bed
-		bedtools intersect -a $TILES_BED -b $BLACKLIST_BED -v -f 0.6 > non_blacklisted_tiles.bed
-		#bedtools intersect -a $TILES_BED -b $BLACKLIST_BED -f 0.6 -wo | awk '{print $1"\t"$2"\t"$3}' > blacklisted_tiles.bed
-		#bedtools intersect -a $TILES_BED -b $BLACKLIST_BED -v -f 0.6 | awk '{print $1"\t"$2"\t"$3}' > non_blacklisted_tiles.bed
+		bedtools intersect -a $TILES_BED -b $EXCLUDED_LIST_BED -f 0.6 -wb | awk '{print $1"\t"$2"\t"$3"\t"$4"_"$5"_"$6}' > excluded_tiles.bed
+		bedtools intersect -a $TILES_BED -b $EXCLUDED_LIST_BED -v -f 0.6 > non_excluded_tiles.bed
+		#bedtools intersect -a $TILES_BED -b $EXCLUDED_LIST_BED -f 0.6 -wo | awk '{print $1"\t"$2"\t"$3}' > excluded_tiles.bed
+		#bedtools intersect -a $TILES_BED -b $EXCLUDED_LIST_BED -v -f 0.6 | awk '{print $1"\t"$2"\t"$3}' > non_excluded_tiles.bed
 		rm $TILES_BED
-		#./addColumn.py blacklisted_tiles.bed $BLACKLIST_CLASS > $TILES_TMP_BED
-		cp blacklisted_tiles.bed $TILES_TMP_BED
-		./addColumn.py non_blacklisted_tiles.bed $NORMAL_CLASS >> $TILES_TMP_BED
+		#./addColumn.py excluded_tiles.bed $EXCLUDED_LIST_CLASS > $TILES_TMP_BED
+		cp excluded_tiles.bed $TILES_TMP_BED
+		./addColumn.py non_excluded_tiles.bed $NORMAL_CLASS >> $TILES_TMP_BED
 		shuf $TILES_TMP_BED > $TILES_BED
 		rm $TILES_TMP_BED
 	fi

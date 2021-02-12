@@ -189,7 +189,7 @@ if [ "$#" -eq 2 ] || [ "$#" -eq 3 ] ; then
 		tileWholeGenome $WINDOW_SIZE true $OVERSAMPLE
 		setup
 		gatherFeatures true
-	#process whole genome for blacklist prediction
+	#process whole genome for excluded list prediction
 	elif [ "$1" = "predict" ] ; then
 		printMessage "Running in prediction mode."
 		tileWholeGenome $WINDOW_SIZE false $OVERSAMPLE

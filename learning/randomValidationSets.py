@@ -23,7 +23,7 @@ def main(argv):
    for i in xrange(numDatasets):
       training = trainingDatasets[i]
       testing = testingDatasets[i]
-      blacklistItemsInTraining = {}
+      excludedlistItemsInTraining = {}
       with open(inputfile, 'r') as f:
          header = f.readline()
          training.write(header)
@@ -38,18 +38,18 @@ def main(argv):
                else:
                   testing.write(line)
             else:
-               columns[len(columns)-1] = "blacklist"
+               columns[len(columns)-1] = "excluded"
                relabeled = ",".join(columns) + "\n"
-               if label not in blacklistItemsInTraining:
+               if label not in excludedlistItemsInTraining:
                   datasetPicker = random.uniform(0, 1)
                   if datasetPicker < trainingRatio:
-                      blacklistItemsInTraining[label] = True
+                      excludedlistItemsInTraining[label] = True
                       training.write(relabeled)
                   else:
-                      blacklistItemsInTraining[label] = False
+                      excludedlistItemsInTraining[label] = False
                       testing.write(relabeled)
                else:
-                   if blacklistItemsInTraining[label]:
+                   if excludedlistItemsInTraining[label]:
                        training.write(relabeled)
                    else:
                        testing.write(relabeled)

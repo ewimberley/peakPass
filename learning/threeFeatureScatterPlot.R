@@ -18,7 +18,7 @@ if (length(args)!=0) {
 trainingDataRaw <- read.csv(trainingFile, header = TRUE)
 #trainingSplit <- split(trainingDataRaw, trainingDataRaw$classLabel)
 png(file = "threeFeatureScatterPlot.png", width = 6, height = 6, units = 'in', res=600)
-#scatter3D(trainingSplit$blacklist[[featureA]], trainingSplit$blacklist[[featureB]], col=alpha("red", 0.4), xlab=featureA, ylab=featureB)
+#scatter3D(trainingSplit$excludedlist[[featureA]], trainingSplit$excludedlist[[featureB]], col=alpha("red", 0.4), xlab=featureA, ylab=featureB)
 #points3D(trainingSplit$normal[[featureA]], trainingSplit$normal[[featureB]], col=alpha("blue", 0.4))
 attach(trainingDataRaw)
 scatter3D(trainingDataRaw[[featureA]], trainingDataRaw[[featureB]], trainingDataRaw[[featureC]], bty = "g", pch = 1, 
@@ -27,5 +27,5 @@ scatter3D(trainingDataRaw[[featureA]], trainingDataRaw[[featureB]], trainingData
           col = c(alpha("red", 0.05), alpha("blue", 0.05)),
           colkey = list(at = c(2, 3), side = 1, 
                         addlines = TRUE, length = 0.5, width = 0.5,
-                        labels = c("blacklist", "normal")) )
+                        labels = c("excluded", "normal")) )
 dev.off()

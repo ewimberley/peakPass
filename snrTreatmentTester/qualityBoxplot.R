@@ -3,7 +3,7 @@ library(reshape2)
 options(echo=TRUE)
 args <- commandArgs(trailingOnly = TRUE)
 qualityDataFile <- args[1]
-#qualityDataFile <- "/thesis/workspace/peakPass/snrTreatmentTester/hg19PredictedBlacklist50Percent/unfiltered_quality_data.csv"
+#qualityDataFile <- "/thesis/workspace/peakPass/snrTreatmentTester/hg19PredictedExcludedlist50Percent/unfiltered_quality_data.csv"
 qualityData <- read.csv(qualityDataFile, header = TRUE)
 colnames(qualityData)[1] <- "id"
 colnames(qualityData)[2] <- "NSC"
